@@ -1,0 +1,79 @@
+﻿@page
+@model MedicalExpertSystem.Pages.MedicalDataSets.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>MedicalData</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MedicalData.Pregnancies" class="control-label"></label>
+                <input asp-for="MedicalData.Pregnancies" class="form-control" />
+                <span asp-validation-for="MedicalData.Pregnancies" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicalData.Glucose" class="control-label"></label>
+                <input asp-for="MedicalData.Glucose" class="form-control" />
+                <span asp-validation-for="MedicalData.Glucose" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicalData.BloodPressure" class="control-label"></label>
+                <input asp-for="MedicalData.BloodPressure" class="form-control" />
+                <span asp-validation-for="MedicalData.BloodPressure" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicalData.SkinThickness" class="control-label"></label>
+                <input asp-for="MedicalData.SkinThickness" class="form-control" />
+                <span asp-validation-for="MedicalData.SkinThickness" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicalData.Insuline" class="control-label"></label>
+                <input asp-for="MedicalData.Insuline" class="form-control" />
+                <span asp-validation-for="MedicalData.Insuline" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicalData.Bmi" class="control-label"></label>
+                <input asp-for="MedicalData.Bmi" class="form-control" />
+                <span asp-validation-for="MedicalData.Bmi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicalData.DiabetesPedigreeFunction" class="control-label"></label>
+                <input asp-for="MedicalData.DiabetesPedigreeFunction" class="form-control" />
+                <span asp-validation-for="MedicalData.DiabetesPedigreeFunction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicalData.Prediction" class="control-label"></label>
+                <input asp-for="MedicalData.Prediction" class="form-control" />
+                <span asp-validation-for="MedicalData.Prediction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicalData.Result" class="control-label"></label>
+                <input asp-for="MedicalData.Result" class="form-control" />
+                <span asp-validation-for="MedicalData.Result" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicalData.UserId" class="control-label"></label>
+                <input asp-for="MedicalData.UserId" class="form-control" />
+                <span asp-validation-for="MedicalData.UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

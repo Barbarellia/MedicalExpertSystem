@@ -1,0 +1,110 @@
+﻿@page
+@model MedicalExpertSystem.Pages.Patients.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Patient</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Patient.LastName" class="control-label"></label>
+                <input asp-for="Patient.LastName" class="form-control" />
+                <span asp-validation-for="Patient.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Patient.FirstName" class="control-label"></label>
+                <input asp-for="Patient.FirstName" class="form-control" />
+                <span asp-validation-for="Patient.FirstName" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Patient.Id" />
+            <div class="form-group">
+                <label asp-for="Patient.UserName" class="control-label"></label>
+                <input asp-for="Patient.UserName" class="form-control" />
+                <span asp-validation-for="Patient.UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Patient.NormalizedUserName" class="control-label"></label>
+                <input asp-for="Patient.NormalizedUserName" class="form-control" />
+                <span asp-validation-for="Patient.NormalizedUserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Patient.Email" class="control-label"></label>
+                <input asp-for="Patient.Email" class="form-control" />
+                <span asp-validation-for="Patient.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Patient.NormalizedEmail" class="control-label"></label>
+                <input asp-for="Patient.NormalizedEmail" class="form-control" />
+                <span asp-validation-for="Patient.NormalizedEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Patient.EmailConfirmed" /> @Html.DisplayNameFor(model => model.Patient.EmailConfirmed)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Patient.PasswordHash" class="control-label"></label>
+                <input asp-for="Patient.PasswordHash" class="form-control" />
+                <span asp-validation-for="Patient.PasswordHash" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Patient.SecurityStamp" class="control-label"></label>
+                <input asp-for="Patient.SecurityStamp" class="form-control" />
+                <span asp-validation-for="Patient.SecurityStamp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Patient.ConcurrencyStamp" class="control-label"></label>
+                <input asp-for="Patient.ConcurrencyStamp" class="form-control" />
+                <span asp-validation-for="Patient.ConcurrencyStamp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Patient.PhoneNumber" class="control-label"></label>
+                <input asp-for="Patient.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Patient.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Patient.PhoneNumberConfirmed" /> @Html.DisplayNameFor(model => model.Patient.PhoneNumberConfirmed)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Patient.TwoFactorEnabled" /> @Html.DisplayNameFor(model => model.Patient.TwoFactorEnabled)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Patient.LockoutEnd" class="control-label"></label>
+                <input asp-for="Patient.LockoutEnd" class="form-control" />
+                <span asp-validation-for="Patient.LockoutEnd" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Patient.LockoutEnabled" /> @Html.DisplayNameFor(model => model.Patient.LockoutEnabled)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Patient.AccessFailedCount" class="control-label"></label>
+                <input asp-for="Patient.AccessFailedCount" class="form-control" />
+                <span asp-validation-for="Patient.AccessFailedCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
