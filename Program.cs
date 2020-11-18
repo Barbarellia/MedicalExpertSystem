@@ -15,7 +15,6 @@ namespace MedicalExpertSystem
     {
         public static void Main(string[] args)
         {
-            //CreateHostBuilder(args).Build().Run();
             var host = CreateHostBuilder(args).Build();
 
             CreateDbIfNotExists(host);
@@ -31,8 +30,8 @@ namespace MedicalExpertSystem
                 try
                 {
                     var context = services.GetRequiredService<MedicalContext>();
-                    context.Database.EnsureCreated();
-                    // DbInitializer.Initialize(context);
+                    //context.Database.EnsureCreated();
+                    DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)
                 {

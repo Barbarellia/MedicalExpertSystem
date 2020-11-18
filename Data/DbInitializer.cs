@@ -17,14 +17,21 @@ namespace MedicalExpertSystem.Data
                 return;
             }
 
-            //var appUsers = new AppUser[]
-            //{
-            //    new AppUser{LastName="Szweda",FirstName="Barbara", UserName="adam@malysz.pl",
-            //            NormalizedUserName="ADAM@MALYSZ.PL",Email="adam@malysz.pl", NormalizedEmail="ADAM@MALYSZ.PL",
-            //            PasswordHash="AQAAAAEAACcQAAAAEF2+bzkrQQJxx/o91I+qPiZo+hx5kd9BbVUsvEWk3S7s6yxnrUoyGh4GjZaxUd58VQ==",
-            //            SecurityStamp="FD4VTY7VO3NXLA6RDQZ7UUTMICJGQAL6",ConcurrencyStamp="f47689b9-d29c-44e4-af26-00152339e041",
-            //            PhoneNumber="123456789",LockoutEnabled=true,AccessFailedCount=0}
-            //};
+            var appUsers = new AppUser[]
+            {
+                new AppUser{LastName="Szweda",FirstName="Barbara", UserName="barbara@szweda.pl",
+                        NormalizedUserName="BARBARA@SZWEDA.PL",Email="barbara@szweda.pl", NormalizedEmail="BARBARA@SZWEDA.PL",
+                        PasswordHash="AQAAAAEAACcQAAAAEPbsk93uC8jC/AxyAxFdCWVgjQP/jy3f++bLeWXf0/9/1WmwwV5gZZ9arqkeiEtrIA==",
+                        SecurityStamp="CTU7AXGWSVBYFHQUTHNLWGZYOLVHYLAJ",
+                        PhoneNumber="123456789",LockoutEnabled=true,AccessFailedCount=0}
+            };
+
+            foreach (AppUser user in appUsers)
+            {
+                context.Users.Add(user);
+            }
+
+            context.SaveChanges();
 
             //var medicalData = new MedicalData[]
             //{

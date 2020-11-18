@@ -14,48 +14,43 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Patient[0].LastName)
+                @Html.DisplayNameFor(model => model.Patients[0].AppUser.LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Patient[0].FirstName)
+                @Html.DisplayNameFor(model => model.Patients[0].AppUser.FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Patient[0].UserName)
+                @Html.DisplayNameFor(model => model.Patients[0].AppUser.UserName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Patient[0].Email)
+                @Html.DisplayNameFor(model => model.Patients[0].AppUser.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Patient[0].PhoneNumber)
+                @Html.DisplayNameFor(model => model.Patients[0].AppUser.PhoneNumber)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Patient) {
+@foreach (var item in Model.Patients) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.LastName)
+                @Html.DisplayFor(modelItem => item.AppUser.LastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
+                @Html.DisplayFor(modelItem => item.AppUser.FirstName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UserName)
+                @Html.DisplayFor(modelItem => item.AppUser.UserName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NormalizedUserName)
+                @Html.DisplayFor(modelItem => item.AppUser.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
+                @Html.DisplayFor(modelItem => item.AppUser.PhoneNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
             </td>
         </tr>
 }

@@ -12,6 +12,7 @@ using MedicalExpertSystem.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MedicalExpertSystem.Models;
 
 namespace MedicalExpertSystem
 {
@@ -27,19 +28,24 @@ namespace MedicalExpertSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddRazorPages();
-
             services.AddDbContext<MedicalContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("MedicalContext")));
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("MedicalContext")));
+
+            services.AddIdentity<AppUser, IdentityRole<int>>(options =>
+            {
+                options.Password.RequiredLength = 3;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+            }).AddEntityFrameworkStores<MedicalContext>();
+
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -65,6 +71,42 @@ namespace MedicalExpertSystem
             {
                 endpoints.MapRazorPages();
             });
+
+            CreateUserRoles(serviceProvider).Wait();
         }
+
+        private async Task CreateUserRoles(IServiceProvider serviceProvider)
+        {
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<AppUser>>();
+
+            string[] roleNames = { "Admin", "Doctor", "Patient" };
+            IdentityResult roleResult;
+
+            foreach(var roleName in roleNames)
+            {
+                var roleExist = await RoleManager.RoleExistsAsync(roleName);
+                if (!roleExist)
+                {
+                    roleResult = await RoleManager.CreateAsync(new IdentityRole<int>(roleName));
+                }
+            }
+
+            var role = await RoleManager.FindByNameAsync("Admin");
+            var user = await UserManager.FindByEmailAsync("barbara@szweda.pl");
+
+            await UserManager.AddToRoleAsync(user, role.Name);
+        }
+
+        //private async Task CreateAdmin(IServiceProvider serviceProvider)
+        //{
+        //    var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
+        //    var UserManager = serviceProvider.GetRequiredService<UserManager<IdentityRole<int>>>();
+
+        //    var role = await RoleManager.FindByNameAsync("Admin");
+        //    var user = await UserManager.FindByEmailAsync("barbara@szweda.pl");
+
+        //    await UserManager.AddToRoleAsync(user, role.Name);
+        //}
     }
 }

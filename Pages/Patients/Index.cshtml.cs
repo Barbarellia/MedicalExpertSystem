@@ -19,11 +19,14 @@ namespace MedicalExpertSystem.Pages.Patients
             _context = context;
         }
 
-        public IList<Patient> Patient { get;set; }
+        public IList<Patient> Patients { get;set; }
 
         public async Task OnGetAsync()
         {
-            Patient = await _context.Patient.ToListAsync();
+            Patients = await _context.Patient
+                .Include(q => q.AppUser)
+                .Include(q => q.MedicalDataSet)
+                .ToListAsync();
         }
     }
 }
