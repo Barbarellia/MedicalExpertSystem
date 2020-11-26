@@ -12,6 +12,15 @@
     <Compile Remove="Migrations\20201118125704_Mig.Designer.cs" />
     <Compile Remove="Migrations\20201118131052_Mig.cs" />
     <Compile Remove="Migrations\20201118131052_Mig.Designer.cs" />
+    <Compile Remove="Migrations\20201118163922_Mig.cs" />
+    <Compile Remove="Migrations\20201118163922_Mig.Designer.cs" />
+    <Compile Remove="Pages\MedicalDataSets\Create.cshtml.cs" />
+    <Compile Remove="Pages\MedicalDataSets\MedicalData.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\MedicalDataSets\Create.cshtml" />
+    <Content Remove="Pages\MedicalDataSets\MedicalData.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +34,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.9" />
+    <PackageReference Include="Microsoft.ML" Version="1.5.2" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
   </ItemGroup>

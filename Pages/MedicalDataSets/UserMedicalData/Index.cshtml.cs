@@ -1,25 +1,24 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MedicalExpertSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using MedicalExpertSystem.Data;
-using MedicalExpertSystem.Models;
 
-namespace MedicalExpertSystem.Pages.MedicalDataSets
+namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
 {
-    public class DetailsModel : PageModel
+    public class IndexModel : PageModel
     {
         private readonly MedicalExpertSystem.Data.MedicalContext _context;
 
-        public DetailsModel(MedicalExpertSystem.Data.MedicalContext context)
+        public IndexModel(MedicalExpertSystem.Data.MedicalContext context)
         {
             _context = context;
         }
 
-        public MedicalData MedicalData { get; set; }
+        public IList<MedicalData> MedicalDatas { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,9 +27,13 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets
                 return NotFound();
             }
 
-            MedicalData = await _context.MedicalData.FirstOrDefaultAsync(m => m.Id == id);
+            MedicalDatas = await _context.MedicalData
+                .Include(x => x.Patient)
+                .ThenInclude(x => x.AppUser)
+                .Where(x => x.Patient.Id == id)
+                .ToListAsync();
 
-            if (MedicalData == null)
+            if (MedicalDatas == null)
             {
                 return NotFound();
             }

@@ -129,9 +129,6 @@ namespace MedicalExpertSystem.Migrations
                     b.Property<int>("SkinThickness")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PatientId");
@@ -288,7 +285,7 @@ namespace MedicalExpertSystem.Migrations
 
             modelBuilder.Entity("MedicalExpertSystem.Models.MedicalData", b =>
                 {
-                    b.HasOne("MedicalExpertSystem.Models.Patient", null)
+                    b.HasOne("MedicalExpertSystem.Models.Patient", "Patient")
                         .WithMany("MedicalDataSet")
                         .HasForeignKey("PatientId");
                 });

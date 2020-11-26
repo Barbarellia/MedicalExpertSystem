@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedicalExpertSystem.Migrations
 {
     [DbContext(typeof(MedicalContext))]
-    [Migration("20201118163922_Mig")]
+    [Migration("20201126131323_Mig")]
     partial class Mig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -129,9 +129,6 @@ namespace MedicalExpertSystem.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int>("SkinThickness")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -290,7 +287,7 @@ namespace MedicalExpertSystem.Migrations
 
             modelBuilder.Entity("MedicalExpertSystem.Models.MedicalData", b =>
                 {
-                    b.HasOne("MedicalExpertSystem.Models.Patient", null)
+                    b.HasOne("MedicalExpertSystem.Models.Patient", "Patient")
                         .WithMany("MedicalDataSet")
                         .HasForeignKey("PatientId");
                 });

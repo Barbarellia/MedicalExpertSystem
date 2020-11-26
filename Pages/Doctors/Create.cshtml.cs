@@ -1,15 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using MedicalExpertSystem.Data;
 using MedicalExpertSystem.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MedicalExpertSystem.Pages.Patients
+namespace MedicalExpertSystem.Pages.Doctors
 {
     public class CreateModel : PageModel
     {
@@ -28,31 +27,31 @@ namespace MedicalExpertSystem.Pages.Patients
         }
 
         [BindProperty]
-        public Patient Patient { get; set; }
+        public AppUser Doctor { get; set; }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid || !_context.Users.Any(
-                q=>q.Email==Patient.AppUser.Email &&
-                q.FirstName==Patient.AppUser.FirstName &&
-                q.LastName==Patient.AppUser.LastName))
+                q => q.Email == Doctor.Email))
             {
-                ModelState.AddModelError(string.Empty, "Nie znaleziono użytkownika.");
+                ModelState.AddModelError(string.Empty, "User not found.");
                 return Page();
             }
 
-            var user = _context.AppUser.FirstOrDefault(x => x.Email == Patient.AppUser.Email);
+            var user = _context.AppUser.FirstOrDefault(x => x.Email == Doctor.Email);
+            var doctorExists = await _userManager.IsInRoleAsync(user, "Doctor");
 
-            if (_context.Patient.Any(x => x.AppUser.Id == user.Id))
+            if (doctorExists)
             {
-                ModelState.AddModelError(string.Empty, "Pacjent jest już zarejestrowany.");
+                ModelState.AddModelError(string.Empty, "Doctor is already added.");
                 return Page();
             }
 
+            await _userManager.AddToRoleAsync(user, "Doctor");
+            await _userManager.RemoveFromRoleAsync(user, "Patient");
+            var patient = _context.Patient.FirstOrDefault(x => x.AppUser == user);
+            _context.Patient.Remove(patient);
 
-            _context.Patient.Add(Patient);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

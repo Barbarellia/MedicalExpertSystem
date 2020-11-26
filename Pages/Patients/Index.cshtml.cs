@@ -7,23 +7,26 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MedicalExpertSystem.Data;
 using MedicalExpertSystem.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace MedicalExpertSystem.Pages.Patients
 {
     public class IndexModel : PageModel
     {
         private readonly MedicalExpertSystem.Data.MedicalContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public IndexModel(MedicalExpertSystem.Data.MedicalContext context)
+        public IndexModel(MedicalExpertSystem.Data.MedicalContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public IList<Patient> Patients { get;set; }
 
         public async Task OnGetAsync()
         {
-            Patients = await _context.Patient
+            Patients = await _context.Patient 
                 .Include(q => q.AppUser)
                 .Include(q => q.MedicalDataSet)
                 .ToListAsync();

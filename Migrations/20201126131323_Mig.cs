@@ -190,7 +190,6 @@ namespace MedicalExpertSystem.Migrations
                     DiabetesPedigreeFunction = table.Column<double>(nullable: false),
                     Prediction = table.Column<bool>(nullable: true),
                     Result = table.Column<bool>(nullable: true),
-                    UserId = table.Column<int>(nullable: false),
                     PatientId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
