@@ -6,20 +6,20 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-page="./Create" asp-route-id="@Model.MedicalDatas[0].Patient.Id">Create New</a>
+    <a asp-page="./Create" asp-route-id="@Model.MedicalDatas[0].Patient.AppUser.Id">Create New</a>
 </p>
 <dl class="row">
     <dt class="col-sm-5">
-        @Html.DisplayNameFor(model => model.MedicalDatas[0].Patient.AppUser.LastName)
+        @Html.DisplayNameFor(model => model.MedicalDatas[0].Patient.AppUser.DecryptedUser.LastName)
     </dt>
     <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.MedicalDatas[0].Patient.AppUser.LastName)
+        @Html.DisplayFor(model => model.MedicalDatas[0].Patient.AppUser.DecryptedUser.LastName)
     </dd>
     <dt class="col-sm-5">
-        @Html.DisplayNameFor(model => model.MedicalDatas[0].Patient.AppUser.FirstName)
+        @Html.DisplayNameFor(model => model.MedicalDatas[0].Patient.AppUser.DecryptedUser.FirstName)
     </dt>
     <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.MedicalDatas[0].Patient.AppUser.FirstName)
+        @Html.DisplayFor(model => model.MedicalDatas[0].Patient.AppUser.DecryptedUser.FirstName)
     </dd>
 </dl>
 <table class="table">

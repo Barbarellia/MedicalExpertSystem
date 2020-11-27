@@ -30,6 +30,18 @@ namespace MedicalExpertSystem.Pages.Patients
                 .Include(q => q.AppUser)
                 .Include(q => q.MedicalDataSet)
                 .ToListAsync();
+
+            foreach (var item in Patients)
+            {
+                item.AppUser.DecryptedUser = new Models.DecryptedUser(item.AppUser);
+            }
         }
     }
+
+    //public class DecryptedUser
+    //{
+    //    public string LastName { get; set; }
+    //    public string FirstName { get; set; }
+
+    //}
 }

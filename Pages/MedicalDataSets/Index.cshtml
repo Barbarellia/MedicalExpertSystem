@@ -23,10 +23,10 @@
 @foreach (var item in Model.Patients) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.AppUser.LastName)
+                @Html.DisplayFor(modelItem => item.AppUser.DecryptedUser.LastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AppUser.FirstName)
+                @Html.DisplayFor(modelItem => item.AppUser.DecryptedUser.FirstName)
             </td>
             <td>
                 <a asp-page="./UserMedicalData/Index" asp-route-id="@item.Id">Medical Data</a>

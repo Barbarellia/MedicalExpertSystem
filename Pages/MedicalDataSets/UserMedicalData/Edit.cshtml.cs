@@ -44,37 +44,36 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(MedicalData).State = EntityState.Modified;
+            //_context.Attach(MedicalData).State = EntityState.Modified;
 
-            try
+            var dataToUpdate = await _context.MedicalData
+                .Include(x=>x.Patient)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if(await TryUpdateModelAsync<MedicalData>(
+                dataToUpdate,
+                "medicalData",
+                x=>x.BloodPressure,
+                x=>x.Bmi,
+                x=>x.DiabetesPedigreeFunction,
+                x=>x.Glucose,
+                x=>x.Insuline,
+                x=>x.Pregnancies,
+                x=>x.SkinThickness
+                ))
             {
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MedicalDataExists(MedicalData.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToRoute("../MedicalDataSets/UserMedicalData/", new { id = dataToUpdate.Patient.Id });
             }
 
-            return RedirectToPage("./Index");
-        }
-
-        private bool MedicalDataExists(int id)
-        {
-            return _context.MedicalData.Any(e => e.Id == id);
+            return Page();
         }
     }
 }

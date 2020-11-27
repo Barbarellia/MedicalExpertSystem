@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using MedicalExpertSystem.Data;
+using MedicalExpertSystem.Security;
 
 namespace MedicalExpertSystem.Areas.Identity.Pages.Account
 {
@@ -89,10 +90,19 @@ namespace MedicalExpertSystem.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new AppUser { UserName = Input.Email, Email = Input.Email, LastName = Input.LastName, FirstName = Input.FirstName, PhoneNumber=Input.PhoneNumber};
+                var user = new AppUser {
+                    UserName=Input.Email,
+                    Email=Input.Email,
+                    LastName=Input.LastName,
+                    FirstName=Input.FirstName,
+                    PhoneNumber=Input.PhoneNumber};
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    user.LastName = RSACipher.Encrypt(Input.LastName);
+                    user.FirstName = RSACipher.Encrypt(Input.FirstName);
+
                     await CreatePatient(user);
                     _logger.LogInformation("User created a new account with password.");
 

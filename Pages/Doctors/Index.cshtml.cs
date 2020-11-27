@@ -23,6 +23,18 @@ namespace MedicalExpertSystem.Pages.Doctors
         public async Task OnGetAsync()
         {
             Doctors = await _userManager.GetUsersInRoleAsync("Doctor");
+
+            foreach (var item in Doctors)
+            {
+                item.DecryptedUser = new Models.DecryptedUser(item);
+            }
         }
+
+        //public class DecryptedUser
+        //{
+        //    public string LastName { get; set; }
+        //    public string FirstName { get; set; }
+
+        //}
     }
 }

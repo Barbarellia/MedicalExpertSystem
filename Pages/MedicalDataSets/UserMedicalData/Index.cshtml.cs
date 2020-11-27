@@ -30,12 +30,12 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
             MedicalDatas = await _context.MedicalData
                 .Include(x => x.Patient)
                 .ThenInclude(x => x.AppUser)
-                .Where(x => x.Patient.Id == id)
+                .Where(x => x.Patient.AppUser.Id == id)
                 .ToListAsync();
 
-            if (MedicalDatas == null)
+            if (MedicalDatas.Count==0)
             {
-                return NotFound();
+                return Page();
             }
             return Page();
         }

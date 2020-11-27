@@ -13,14 +13,14 @@
         <form method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="MedicalData.Patient.AppUser.LastName" class="control-label"></label>
-                <input asp-for="MedicalData.Patient.AppUser.LastName" class="form-control" disabled />
-                <span asp-validation-for="MedicalData.Patient.AppUser.LastName" class="text-danger"></span>
+                <label asp-for="MedicalData.Patient.AppUser.DecryptedUser.LastName" class="control-label"></label>
+                <input asp-for="MedicalData.Patient.AppUser.DecryptedUser.LastName" class="form-control" disabled />
+                <span asp-validation-for="MedicalData.Patient.AppUser.DecryptedUser.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MedicalData.Patient.AppUser.FirstName" class="control-label"></label>
-                <input asp-for="MedicalData.Patient.AppUser.FirstName" class="form-control" disabled />
-                <span asp-validation-for="MedicalData.Patient.AppUser.FirstName" class="text-danger"></span>
+                <label asp-for="MedicalData.Patient.AppUser.DecryptedUser.FirstName" class="control-label"></label>
+                <input asp-for="MedicalData.Patient.AppUser.DecryptedUser.FirstName" class="form-control" disabled />
+                <span asp-validation-for="MedicalData.Patient.AppUser.DecryptedUser.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="MedicalData.Pregnancies" class="control-label"></label>
@@ -65,7 +65,7 @@
 </div>
 
 <div>
-    <a asp-page="./Index" asp-route-id="@Model.MedicalData.Patient.Id">Back to List</a>
+    <a asp-page="./Index" asp-route-id="@Model.MedicalData.Patient.AppUser.Id">Back to List</a>
 </div>
 
 @section Scripts {
