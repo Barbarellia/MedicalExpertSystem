@@ -28,8 +28,12 @@ namespace MedicalExpertSystem.Pages.Patients
                 return NotFound();
             }
 
-            Patient = await _context.Patient.FirstOrDefaultAsync(m => m.Id == id);
+            Patient = await _context.Patient
+                .Include(x=>x.AppUser)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
+            Patient.AppUser.DecryptedUser = new Models.DecryptedUser(Patient.AppUser);
+            
             if (Patient == null)
             {
                 return NotFound();

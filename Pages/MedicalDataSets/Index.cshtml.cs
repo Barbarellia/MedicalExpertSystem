@@ -31,6 +31,7 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets
             {
                 item.AppUser.DecryptedUser = new DecryptedUser(item.AppUser);
             }
+
         }
 
         //public class DecryptedUser

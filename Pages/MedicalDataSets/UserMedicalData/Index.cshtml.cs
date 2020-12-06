@@ -19,6 +19,7 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
         }
 
         public IList<MedicalData> MedicalDatas { get; set; }
+        public Patient Patient { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -27,16 +28,21 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
                 return NotFound();
             }
 
+            Patient = await _context.Patient.FirstOrDefaultAsync(x=>x.Id==id);
+            
             MedicalDatas = await _context.MedicalData
-                .Include(x => x.Patient)
-                .ThenInclude(x => x.AppUser)
-                .Where(x => x.Patient.AppUser.Id == id)
+                //.Include(x => x.Patient)
+                //.ThenInclude(x => x.AppUser)
+                .Where(x => x.Patient.Id == id)
                 .ToListAsync();
 
-            if (MedicalDatas.Count==0)
-            {
-                return Page();
-            }
+            Patient.MedicalDataSet = (List<MedicalData>)MedicalDatas;
+            //if (MedicalDatas.Any())
+            //{
+            //    return Page();
+            //}
+
+            ////if we got this far, something went wrong
             return Page();
         }
     }
