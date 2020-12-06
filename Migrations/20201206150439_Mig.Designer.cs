@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedicalExpertSystem.Migrations
 {
     [DbContext(typeof(MedicalContext))]
-    [Migration("20201206141331_Mig")]
+    [Migration("20201206150439_Mig")]
     partial class Mig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,8 +107,8 @@ namespace MedicalExpertSystem.Migrations
                     b.Property<int>("BloodPressure")
                         .HasColumnType("int");
 
-                    b.Property<int>("Bmi")
-                        .HasColumnType("int");
+                    b.Property<double>("Bmi")
+                        .HasColumnType("float");
 
                     b.Property<double>("DiabetesPedigreeFunction")
                         .HasColumnType("float");
@@ -116,7 +116,7 @@ namespace MedicalExpertSystem.Migrations
                     b.Property<int>("Glucose")
                         .HasColumnType("int");
 
-                    b.Property<int>("Insuline")
+                    b.Property<int>("Insulin")
                         .HasColumnType("int");
 
                     b.Property<int?>("PatientId")

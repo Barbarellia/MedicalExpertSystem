@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.ML.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,13 +8,23 @@ namespace MedicalExpertSystem.AI
 {
     public class ModelInput
     {
-        public int Age { get; set; }
-        public int Pregnancies { get; set; }
-        public int Glucose { get; set; }
-        public int BloodPressure { get; set; }
-        public int SkinThickness { get; set; }
-        public int Insuline { get; set; }
-        public int Bmi { get; set; }
-        public double DiabetesPedigreeFunction { get; set; }
+        [ColumnName("Pregnancies"), LoadColumn(0)]
+        public float Pregnancies { get; set; }
+        [ColumnName("Glucose"), LoadColumn(1)]
+        public float Glucose { get; set; }
+        [ColumnName("BloodPressure"), LoadColumn(2)]
+        public float BloodPressure { get; set; }
+        [ColumnName("SkinThickness"), LoadColumn(3)]
+        public float SkinThickness { get; set; }
+        [ColumnName("Insulin"), LoadColumn(4)]
+        public float Insulin { get; set; }
+        [ColumnName("Bmi"), LoadColumn(5)]
+        public float Bmi { get; set; }
+        [ColumnName("DiabetesPedigreeFunction"), LoadColumn(6)]
+        public float DiabetesPedigreeFunction { get; set; }
+        [ColumnName("Age"), LoadColumn(7)]
+        public float Age { get; set; }
+        [ColumnName("Label"), LoadColumn(8)]
+        public bool Outcome { get; set; }
     }
 }

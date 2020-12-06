@@ -33,6 +33,19 @@ namespace MedicalExpertSystem.NeuralNetwork
                 InitialTraining();
             }
         }
+        public double InitialTraining()
+        {
+            var ctx = new MLContext();
+            var data = ctx.Data.LoadFromTextFile<ModelInput>(path: _file, hasHeader: true, separatorChar: ',');
+            return Train(data, ctx);
+        }
+
+        public double TrainingWithDatabase(List<ModelInput> listData)
+        {
+            var ctx = new MLContext();
+            IDataView data = ctx.Data.LoadFromEnumerable<ModelInput>(listData);
+            return Train(data, ctx);
+        }
 
         private double Train(IDataView data, MLContext ctx)
         {
@@ -60,20 +73,6 @@ namespace MedicalExpertSystem.NeuralNetwork
             return metrics.Accuracy;
         }
 
-        public double InitialTraining()
-        {
-            var ctx = new MLContext();
-            var data = ctx.Data.LoadFromTextFile<ModelInput>(path: _file, hasHeader: true, separatorChar: ',');
-            return Train(data, ctx);
-        }
-
-        public double TrainingWithDatabase(List<ModelInput> listData)
-        {
-            var ctx = new MLContext();
-            IDataView data = ctx.Data.LoadFromEnumerable<ModelInput>(listData);
-            return Train(data, ctx);
-        }
-
         public PredictionModelOutput Predict(PredictionModel input)
         {
             var ctx = new MLContext();
@@ -85,7 +84,7 @@ namespace MedicalExpertSystem.NeuralNetwork
                 Age = input.Age,
                 Bmi = input.Bmi,
                 Glucose = input.Glucose,
-                Insuline = input.Insuline,
+                Insulin = input.Insulin,
                 Pregnancies = input.Pregnancies,
                 BloodPressure = input.BloodPressure,
                 SkinThickness = input.SkinThickness,

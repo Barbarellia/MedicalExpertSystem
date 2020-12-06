@@ -16,6 +16,8 @@
     <Compile Remove="Migrations\20201118163922_Mig.Designer.cs" />
     <Compile Remove="Migrations\20201126131323_Mig.cs" />
     <Compile Remove="Migrations\20201126131323_Mig.Designer.cs" />
+    <Compile Remove="Migrations\20201206141331_Mig.cs" />
+    <Compile Remove="Migrations\20201206141331_Mig.Designer.cs" />
     <Compile Remove="Pages\MedicalDataSets\Create.cshtml.cs" />
     <Compile Remove="Pages\MedicalDataSets\MedicalData.cshtml.cs" />
   </ItemGroup>

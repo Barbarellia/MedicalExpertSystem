@@ -181,14 +181,14 @@ namespace MedicalExpertSystem.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Age = table.Column<int>(nullable: false),
                     Pregnancies = table.Column<int>(nullable: false),
                     Glucose = table.Column<int>(nullable: false),
                     BloodPressure = table.Column<int>(nullable: false),
                     SkinThickness = table.Column<int>(nullable: false),
-                    Insuline = table.Column<int>(nullable: false),
-                    Bmi = table.Column<int>(nullable: false),
+                    Insulin = table.Column<int>(nullable: false),
                     DiabetesPedigreeFunction = table.Column<double>(nullable: false),
+                    Bmi = table.Column<double>(nullable: false),
+                    Age = table.Column<int>(nullable: false),
                     Prediction = table.Column<bool>(nullable: true),
                     Result = table.Column<bool>(nullable: true),
                     PatientId = table.Column<int>(nullable: true)

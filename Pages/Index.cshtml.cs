@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using MedicalExpertSystem.AI;
 
 namespace MedicalExpertSystem.Pages
 {
@@ -19,7 +20,7 @@ namespace MedicalExpertSystem.Pages
 
         public void OnGet()
         {
-
+            AI.AI ai = new AI.AI();
         }
     }
 }

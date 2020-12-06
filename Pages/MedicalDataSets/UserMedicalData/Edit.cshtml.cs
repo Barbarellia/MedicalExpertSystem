@@ -65,7 +65,7 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
                 x=>x.Bmi,
                 x=>x.DiabetesPedigreeFunction,
                 x=>x.Glucose,
-                x=>x.Insuline,
+                x=>x.Insulin,
                 x=>x.Pregnancies,
                 x=>x.SkinThickness
                 ))
