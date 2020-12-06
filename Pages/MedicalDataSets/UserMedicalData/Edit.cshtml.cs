@@ -60,6 +60,7 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
             if(await TryUpdateModelAsync<MedicalData>(
                 dataToUpdate,
                 "medicalData",
+                x=>x.Age,
                 x=>x.BloodPressure,
                 x=>x.Bmi,
                 x=>x.DiabetesPedigreeFunction,

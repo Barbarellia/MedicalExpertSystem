@@ -66,6 +66,7 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
             if (await TryUpdateModelAsync<MedicalData>(
                 emptyData,
                 "medicalData",
+                q=>q.Age,
                 q=>q.BloodPressure, 
                 q=>q.Bmi,
                 q=>q.DiabetesPedigreeFunction,

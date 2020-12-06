@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedicalExpertSystem.Migrations
 {
     [DbContext(typeof(MedicalContext))]
-    [Migration("20201126131323_Mig")]
+    [Migration("20201206141331_Mig")]
     partial class Mig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -100,6 +100,9 @@ namespace MedicalExpertSystem.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
 
                     b.Property<int>("BloodPressure")
                         .HasColumnType("int");

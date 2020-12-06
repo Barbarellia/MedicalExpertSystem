@@ -9,6 +9,7 @@ namespace MedicalExpertSystem.Models
     public class MedicalData
     {
         public int Id { get; set; }
+        public int Age { get; set; }
         public int Pregnancies { get; set; }
         public int Glucose { get; set; }
         public int BloodPressure { get; set; }

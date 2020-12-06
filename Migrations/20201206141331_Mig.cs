@@ -181,6 +181,7 @@ namespace MedicalExpertSystem.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Age = table.Column<int>(nullable: false),
                     Pregnancies = table.Column<int>(nullable: false),
                     Glucose = table.Column<int>(nullable: false),
                     BloodPressure = table.Column<int>(nullable: false),

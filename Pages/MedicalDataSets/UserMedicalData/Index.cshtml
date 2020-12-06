@@ -26,6 +26,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.MedicalDatas[0].Age)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.MedicalDatas[0].Pregnancies)
             </th>
             <th>
@@ -58,39 +61,42 @@
     <tbody>
         @foreach (var item in Model.MedicalDatas)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Pregnancies)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Glucose)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BloodPressure)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SkinThickness)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Insuline)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DiabetesPedigreeFunction)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Bmi)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Prediction)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Result)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pregnancies)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Glucose)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BloodPressure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SkinThickness)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Insuline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiabetesPedigreeFunction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bmi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prediction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Result)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

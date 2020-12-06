@@ -99,6 +99,9 @@ namespace MedicalExpertSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
                     b.Property<int>("BloodPressure")
                         .HasColumnType("int");
 
