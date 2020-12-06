@@ -1,0 +1,83 @@
+﻿@page
+@model MedicalExpertSystem.Pages.Learn.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicalDatas[0].Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicalDatas[0].Pregnancies)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicalDatas[0].Glucose)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicalDatas[0].BloodPressure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicalDatas[0].SkinThickness)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicalDatas[0].Insulin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicalDatas[0].DiabetesPedigreeFunction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicalDatas[0].Bmi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicalDatas[0].Prediction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicalDatas[0].Result)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.MedicalDatas)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pregnancies)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Glucose)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BloodPressure)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SkinThickness)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Insulin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiabetesPedigreeFunction)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bmi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prediction)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Result)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -22,30 +22,38 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
         [BindProperty]
         public MedicalData MedicalData { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? idP, int? idMD)
         {
-            if (id == null)
+            if (idP == null || idMD == null)
             {
                 return NotFound();
             }
 
-            MedicalData = await _context.MedicalData.FirstOrDefaultAsync(m => m.Id == id);
+            MedicalData = await _context.MedicalData
+                .Include(x => x.Patient)
+                .ThenInclude(x => x.AppUser)
+                .FirstOrDefaultAsync(m => m.Id == idMD);            
 
             if (MedicalData == null)
             {
                 return NotFound();
             }
+
+            MedicalData.Patient.AppUser.DecryptedUser = new DecryptedUser(MedicalData.Patient.AppUser);
+
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int? idP, int? idMD)
         {
-            if (id == null)
+            if (idP == null)
             {
                 return NotFound();
             }
 
-            MedicalData = await _context.MedicalData.FindAsync(id);
+            MedicalData = await _context.MedicalData
+                .Include(x => x.Patient)
+                .FirstOrDefaultAsync(x=>x.Id==idMD);
 
             if (MedicalData != null)
             {
@@ -53,7 +61,7 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index", new { id = idP });
         }
     }
 }

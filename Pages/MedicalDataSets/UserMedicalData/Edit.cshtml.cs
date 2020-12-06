@@ -23,9 +23,9 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
         [BindProperty]
         public MedicalData MedicalData { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? idP, int? idMD)
         {
-            if (id == null)
+            if (idP == null || idMD==null)
             {
                 return NotFound();
             }
@@ -33,7 +33,10 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
             MedicalData = await _context.MedicalData
                 .Include(x => x.Patient)
                 .ThenInclude(x => x.AppUser)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == idMD);
+
+            MedicalData.Patient.AppUser.DecryptedUser = new DecryptedUser(MedicalData.Patient.AppUser);
+
 
             if (MedicalData == null)
             {
@@ -44,7 +47,7 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int? idP)
         {
             if (!ModelState.IsValid)
             {
@@ -55,7 +58,7 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
 
             var dataToUpdate = await _context.MedicalData
                 .Include(x=>x.Patient)
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == idP);
 
             if(await TryUpdateModelAsync<MedicalData>(
                 dataToUpdate,
@@ -67,11 +70,12 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
                 x=>x.Glucose,
                 x=>x.Insulin,
                 x=>x.Pregnancies,
-                x=>x.SkinThickness
+                x=>x.SkinThickness,
+                x=>x.Prediction
                 ))
             {
                 await _context.SaveChangesAsync();
-                return RedirectToRoute("../MedicalDataSets/UserMedicalData/", new { id = dataToUpdate.Patient.Id });
+                return RedirectToPage("./Index", new { id = dataToUpdate.Patient.Id });
             }
 
             return Page();

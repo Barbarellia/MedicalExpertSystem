@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedicalExpertSystem.Migrations
 {
     [DbContext(typeof(MedicalContext))]
-    [Migration("20201206150439_Mig")]
+    [Migration("20201206185846_Mig")]
     partial class Mig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

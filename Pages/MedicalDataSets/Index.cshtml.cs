@@ -33,12 +33,5 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets
             }
 
         }
-
-        //public class DecryptedUser
-        //{
-        //    public string LastName { get; set; }
-        //    public string FirstName { get; set; }
-
-        //}
     }
 }

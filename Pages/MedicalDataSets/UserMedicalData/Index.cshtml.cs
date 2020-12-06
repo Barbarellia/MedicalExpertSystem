@@ -28,13 +28,18 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
                 return NotFound();
             }
 
-            Patient = await _context.Patient.FirstOrDefaultAsync(x=>x.Id==id);
-            
+            Patient = await _context.Patient
+                .Include(z=>z.AppUser)
+                .FirstOrDefaultAsync(x=>x.Id==id);
+
+            Patient.AppUser.DecryptedUser = new DecryptedUser(Patient.AppUser);
+
             MedicalDatas = await _context.MedicalData
                 //.Include(x => x.Patient)
                 //.ThenInclude(x => x.AppUser)
                 .Where(x => x.Patient.Id == id)
                 .ToListAsync();
+
 
             Patient.MedicalDataSet = (List<MedicalData>)MedicalDatas;
             //if (MedicalDatas.Any())

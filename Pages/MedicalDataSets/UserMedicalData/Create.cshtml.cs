@@ -91,7 +91,7 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
                 emptyData.Prediction = result.Prediction;
                 _context.MedicalData.Add(emptyData);
                 await _context.SaveChangesAsync();
-                return RedirectToPage("MedicalDataSets/UserMedicalData/Index");
+                return RedirectToPage("./Index", new { id = emptyData.Patient.Id });
             }
             return Page();
         }
