@@ -42,6 +42,8 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
 
 
             Patient.MedicalDataSet = (List<MedicalData>)MedicalDatas;
+
+
             //if (MedicalDatas.Any())
             //{
             //    return Page();

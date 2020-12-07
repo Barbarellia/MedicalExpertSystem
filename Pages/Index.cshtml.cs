@@ -6,21 +6,36 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using MedicalExpertSystem.AI;
+using Microsoft.AspNetCore.Identity;
+using MedicalExpertSystem.Models;
 
 namespace MedicalExpertSystem.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly UserManager<AppUser> _userManager;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(UserManager<AppUser> userManager)
         {
-            _logger = logger;
+            _userManager = userManager;
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-            AI.AI ai = new AI.AI();
+            var allUsers = _userManager.Users.ToList();
+
+            foreach (var user in allUsers)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+
+                if (roles.Count == 0)
+                {
+                    await _userManager.AddToRoleAsync(user, "Patient");
+                    //await _context.SaveChangesAsync();
+                }
+            }
+
+            return Page();
         }
     }
 }

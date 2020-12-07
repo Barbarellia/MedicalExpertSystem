@@ -32,6 +32,7 @@ namespace MedicalExpertSystem
                     var context = services.GetRequiredService<MedicalContext>();
                     //context.Database.EnsureCreated();
                     DbInitializer.Initialize(context);
+                    //DbInitializer.PredictSeededMedData();
                 }
                 catch (Exception ex)
                 {

@@ -60,19 +60,7 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
             var emptyData = new MedicalData();
             emptyData.Patient = await _context.Patient.FirstOrDefaultAsync(q => q.Id == id);
             AI.AI ai = new AI.AI();
-
-            PredictionModel model = new PredictionModel()
-            {
-                Age = emptyData.Age,
-                Bmi = (float)emptyData.Bmi,
-                Glucose = emptyData.Glucose,
-                Insulin = emptyData.Insulin,
-                Pregnancies = emptyData.Pregnancies,
-                BloodPressure = emptyData.BloodPressure,
-                SkinThickness = emptyData.SkinThickness,
-                DiabetesPedigreeFunction = (float)emptyData.DiabetesPedigreeFunction,
-
-            };
+                      
 
             if (await TryUpdateModelAsync<MedicalData>(
                 emptyData,
@@ -87,6 +75,19 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
                 q => q.SkinThickness
                 ))
             {
+                PredictionModel model = new PredictionModel()
+                {
+                    Age = emptyData.Age,
+                    Bmi = (float)emptyData.Bmi,
+                    Glucose = emptyData.Glucose,
+                    Insulin = emptyData.Insulin,
+                    Pregnancies = emptyData.Pregnancies,
+                    BloodPressure = emptyData.BloodPressure,
+                    SkinThickness = emptyData.SkinThickness,
+                    DiabetesPedigreeFunction = (float)emptyData.DiabetesPedigreeFunction,
+
+                };
+
                 var result = ai.Predict(model);
                 emptyData.Prediction = result.Prediction;
                 _context.MedicalData.Add(emptyData);

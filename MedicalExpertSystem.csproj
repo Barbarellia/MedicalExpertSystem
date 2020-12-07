@@ -20,6 +20,12 @@
     <Compile Remove="Migrations\20201206141331_Mig.Designer.cs" />
     <Compile Remove="Migrations\20201206150439_Mig.cs" />
     <Compile Remove="Migrations\20201206150439_Mig.Designer.cs" />
+    <Compile Remove="Migrations\20201206185846_Mig.cs" />
+    <Compile Remove="Migrations\20201206185846_Mig.Designer.cs" />
+    <Compile Remove="Migrations\20201206222009_Mig.cs" />
+    <Compile Remove="Migrations\20201206222009_Mig.Designer.cs" />
+    <Compile Remove="Migrations\20201206223241_Mig.cs" />
+    <Compile Remove="Migrations\20201206223241_Mig.Designer.cs" />
     <Compile Remove="Pages\MedicalDataSets\Create.cshtml.cs" />
     <Compile Remove="Pages\MedicalDataSets\MedicalData.cshtml.cs" />
   </ItemGroup>

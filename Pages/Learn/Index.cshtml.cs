@@ -51,8 +51,15 @@ namespace MedicalExpertSystem.Pages.Learn
             //{
             //    return NotFound();
             //}
-            //var accuracy = ai.DatabaseLearning(preparedList);
-            
+            try
+            {
+                var accuracy = ai.DatabaseLearning(preparedList);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
 
             return Page();
         }
