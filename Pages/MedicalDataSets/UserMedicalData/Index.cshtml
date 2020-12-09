@@ -95,6 +95,9 @@
             <td>
                 <a asp-page="./Edit" asp-route-idMD="@item.Id" asp-route-idP="@item.Patient.Id">Edit</a> |
                 <a asp-page="./Delete" asp-route-idMD="@item.Id" asp-route-idP="@item.Patient.Id">Delete</a>
+                <form method="POST">
+                    <button type="submit" asp-route-idMD="@item.Id" asp-route-idP="@item.Patient.Id" asp-page-handler="CalculatePrediction">Predict</button>
+                </form>
             </td>
         </tr>
         }

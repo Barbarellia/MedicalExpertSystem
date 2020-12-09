@@ -71,7 +71,8 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
                 x=>x.Insulin,
                 x=>x.Pregnancies,
                 x=>x.SkinThickness,
-                x=>x.Prediction
+                x=>x.Prediction,
+                x=>x.Result
                 ))
             {
                 await _context.SaveChangesAsync();

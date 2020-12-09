@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 using MedicalExpertSystem.AI;
+using MedicalExpertSystem.Utility;
 
 namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
 {
@@ -59,9 +60,8 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
 
             var emptyData = new MedicalData();
             emptyData.Patient = await _context.Patient.FirstOrDefaultAsync(q => q.Id == id);
-            AI.AI ai = new AI.AI();
-                      
-
+            
+                                
             if (await TryUpdateModelAsync<MedicalData>(
                 emptyData,
                 "medicalData",
@@ -75,21 +75,26 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
                 q => q.SkinThickness
                 ))
             {
-                PredictionModel model = new PredictionModel()
-                {
-                    Age = emptyData.Age,
-                    Bmi = (float)emptyData.Bmi,
-                    Glucose = emptyData.Glucose,
-                    Insulin = emptyData.Insulin,
-                    Pregnancies = emptyData.Pregnancies,
-                    BloodPressure = emptyData.BloodPressure,
-                    SkinThickness = emptyData.SkinThickness,
-                    DiabetesPedigreeFunction = (float)emptyData.DiabetesPedigreeFunction,
+                //AI.AI ai = new AI.AI();
+                //PredictionModel model = new PredictionModel()
+                //{
+                //    Age = emptyData.Age,
+                //    Bmi = (float)emptyData.Bmi,
+                //    Glucose = emptyData.Glucose,
+                //    Insulin = emptyData.Insulin,
+                //    Pregnancies = emptyData.Pregnancies,
+                //    BloodPressure = emptyData.BloodPressure,
+                //    SkinThickness = emptyData.SkinThickness,
+                //    DiabetesPedigreeFunction = (float)emptyData.DiabetesPedigreeFunction,
 
-                };
+                //};
 
-                var result = ai.Predict(model);
-                emptyData.Prediction = result.Prediction;
+                //var result = ai.Predict(model);
+                //emptyData.Prediction = result.Prediction;
+                                               
+                //emptyData.Prediction = PredictData.SetPrediction(emptyData);
+                
+
                 _context.MedicalData.Add(emptyData);
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index", new { id = emptyData.Patient.Id });

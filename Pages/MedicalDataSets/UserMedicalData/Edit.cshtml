@@ -69,6 +69,11 @@
                 <span asp-validation-for="MedicalData.DiabetesPedigreeFunction" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="MedicalData.Result" class="control-label"></label>
+                <input asp-for="MedicalData.Result" class="form-control" />
+                <span asp-validation-for="MedicalData.Result" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

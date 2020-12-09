@@ -6,6 +6,7 @@ using MedicalExpertSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using MedicalExpertSystem.Utility;
 
 namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
 {
@@ -50,6 +51,40 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
             //}
 
             ////if we got this far, something went wrong
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostCalculatePrediction(int? idMD, int? idP)
+        {          
+            var dataToUpdate = await _context.MedicalData.FirstOrDefaultAsync(x => x.Id == idMD);
+                        
+            var prediction = PredictData.SetPrediction(dataToUpdate);
+
+            dataToUpdate.Prediction = prediction.Prediction;
+
+            if (await TryUpdateModelAsync<MedicalData>(
+                dataToUpdate,
+                "medicalData",
+                x => x.Prediction))
+            {
+                await _context.SaveChangesAsync();                
+            }
+
+            Patient = await _context.Patient
+                .Include(z => z.AppUser)
+                .FirstOrDefaultAsync(x => x.Id == idP);
+
+            Patient.AppUser.DecryptedUser = new DecryptedUser(Patient.AppUser);
+
+            MedicalDatas = await _context.MedicalData
+                .Where(x => x.Patient.Id == idP)
+                .ToListAsync();
+
+            if(MedicalDatas ==null || Patient == null)
+            {
+                return NotFound();
+            }
+
             return Page();
         }
     }

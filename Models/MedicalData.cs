@@ -20,28 +20,9 @@ namespace MedicalExpertSystem.Models
         public double DiabetesPedigreeFunction { get; set; }
         public double Bmi { get; set; }
         public int Age { get; set; }
-        public bool? Prediction { get { return GetPrediction(); } set { } }
+        public bool? Prediction { get; set; }
         public bool? Result { get; set; }
         public Patient Patient { get; set; }
-
-        private bool GetPrediction()
-        {
-            var ai = new AI.AI();
-
-            PredictionModel model = new PredictionModel()
-            {
-                Age = Age,
-                Bmi = (float)Bmi,
-                Glucose = Glucose,
-                Insulin = Insulin,
-                Pregnancies = Pregnancies,
-                BloodPressure = BloodPressure,
-                SkinThickness = SkinThickness,
-                DiabetesPedigreeFunction = (float)DiabetesPedigreeFunction
-            };
-
-            var predictionOutput = ai.Predict(model);
-            return predictionOutput.Prediction;
-        }
+       
     }
 }
