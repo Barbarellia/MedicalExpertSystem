@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
+    ViewData["MedicalDatas"] = "MedicalDatas";
 }
 
 <h4>@ViewData["Title"]</h4>
@@ -23,6 +24,79 @@
             <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>
+</div>
+
+<div class="col-md-6">
+    <h4>@ViewData["MedicalDatas"]</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.MedicalDatas[0].Age)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MedicalDatas[0].Pregnancies)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MedicalDatas[0].Glucose)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MedicalDatas[0].BloodPressure)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MedicalDatas[0].SkinThickness)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MedicalDatas[0].Insulin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MedicalDatas[0].DiabetesPedigreeFunction)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MedicalDatas[0].Bmi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MedicalDatas[0].Result)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.MedicalDatas)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Age)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pregnancies)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Glucose)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BloodPressure)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SkinThickness)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Insulin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DiabetesPedigreeFunction)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Bmi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Result)
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
 </div>
 
 @section Scripts {

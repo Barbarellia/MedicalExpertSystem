@@ -7,6 +7,7 @@ using MedicalExpertSystem.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace MedicalExpertSystem.Pages.Doctors
 {
@@ -47,14 +48,26 @@ namespace MedicalExpertSystem.Pages.Doctors
                 return Page();
             }
 
-            await _userManager.AddToRoleAsync(user, "Doctor");
-            await _userManager.RemoveFromRoleAsync(user, "Patient");
-            var patient = _context.Patient.FirstOrDefault(x => x.AppUser == user);
-            _context.Patient.Remove(patient);
+            var patient = await _context.Patient
+                .Include(x=>x.MedicalDataSet)
+                .FirstOrDefaultAsync(x => x.AppUser == user);
 
-            await _context.SaveChangesAsync();
+            if(patient.MedicalDataSet == null)
+            {
+                await _userManager.AddToRoleAsync(user, "Doctor");
+                await _userManager.RemoveFromRoleAsync(user, "Patient");
+                _context.Patient.Remove(patient);
 
-            return RedirectToPage("./Index");
+                await _context.SaveChangesAsync();
+
+                return RedirectToPage("./Index");
+            }
+
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Patient already has medical data. Changing user role is unavailable.");
+                return Page();
+            }
         }
     }
 }

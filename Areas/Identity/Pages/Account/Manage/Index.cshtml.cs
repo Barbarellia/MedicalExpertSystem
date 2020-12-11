@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using MedicalExpertSystem.Data;
 using MedicalExpertSystem.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace MedicalExpertSystem.Areas.Identity.Pages.Account.Manage
 {
@@ -14,13 +16,16 @@ namespace MedicalExpertSystem.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly MedicalContext _context;
 
         public IndexModel(
             UserManager<AppUser> userManager,
-            SignInManager<AppUser> signInManager)
+            SignInManager<AppUser> signInManager,
+            MedicalContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
         public string Username { get; set; }
@@ -30,6 +35,7 @@ namespace MedicalExpertSystem.Areas.Identity.Pages.Account.Manage
 
         [BindProperty]
         public InputModel Input { get; set; }
+        public List<MedicalData> MedicalDatas { get; set; }
 
         public class InputModel
         {
@@ -42,7 +48,7 @@ namespace MedicalExpertSystem.Areas.Identity.Pages.Account.Manage
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
+            
             Username = userName;
 
             Input = new InputModel
@@ -58,6 +64,12 @@ namespace MedicalExpertSystem.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
+
+            var patient = await _context.Patient
+                .FirstOrDefaultAsync(x => x.AppUser.Id == user.Id);
+            MedicalDatas = await _context.MedicalData
+                .Where(x => x.Patient.Id == patient.Id).ToListAsync();
+
 
             await LoadAsync(user);
             return Page();
