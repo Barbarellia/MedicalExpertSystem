@@ -19,6 +19,7 @@ namespace MedicalExpertSystem.Pages.Learn
             _context = context;
         }
 
+        [BindProperty]
         public IList<MedicalData> MedicalDatas { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
@@ -26,7 +27,28 @@ namespace MedicalExpertSystem.Pages.Learn
             MedicalDatas = await _context.MedicalData
                 .Where(x => x.Prediction != null)
                 .ToListAsync();
+                
 
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostLearnFile()
+        {
+            AI.AI ai = new AI.AI();
+            double accuracy = ai.InitialLearning();
+
+            MedicalDatas = await _context.MedicalData
+                .Where(x => x.Prediction != null)
+                .ToListAsync();
+
+            var round = Math.Round(accuracy*100);
+
+            ModelState.AddModelError(string.Empty, "Accuracy: " + round + "%");
+            return Page();            
+        }
+
+        public async Task<IActionResult> OnPostLearnDb()
+        {
             AI.AI ai = new AI.AI();
 
             var preparedList = new List<ModelInput>();
@@ -47,10 +69,10 @@ namespace MedicalExpertSystem.Pages.Learn
                 preparedList.Add(item);
             }
 
-            //if (preparedList.Count < 15)
-            //{
-            //    return NotFound();
-            //}
+            if (preparedList.Count < 15)
+            {
+                return NotFound();
+            }
             try
             {
                 var accuracy = ai.DatabaseLearning(preparedList);
@@ -60,8 +82,9 @@ namespace MedicalExpertSystem.Pages.Learn
                 throw e;
             }
 
-
             return Page();
         }
+
+
     }
 }

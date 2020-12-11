@@ -70,7 +70,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="MedicalData.Result" class="control-label"></label>
-                <input asp-for="MedicalData.Result" class="form-control" />
+                @*<input asp-for="MedicalData.Result" class="form-control" />*@
+                @Html.DropDownListFor(model => model.MedicalData.Result, new SelectList(new string[] { "True", "False" }, Model.MedicalData.Result))
                 <span asp-validation-for="MedicalData.Result" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -49,7 +49,7 @@ namespace MedicalExpertSystem.NeuralNetwork
 
         private double Train(IDataView data, MLContext ctx)
         {
-            var split = ctx.Data.TrainTestSplit(data, testFraction: 0.25);
+            var split = ctx.Data.TrainTestSplit(data, testFraction: 0.18);
 
             var features = split.TrainSet.Schema
                 .Select(col => col.Name)
@@ -59,15 +59,16 @@ namespace MedicalExpertSystem.NeuralNetwork
             {
                 MaximumNumberOfIterations = 100,
             };
-            var pipeline=ctx.Transforms.Concatenate("Features", features).Append(ctx.BinaryClassification.Trainers.LbfgsLogisticRegression());
-
+                     
+            var pipeline = ctx.Transforms.Concatenate("Features", features)
+                 .Append(ctx.BinaryClassification.Trainers.Gam(learningRate: 0.052, numberOfIterations: 25000));
+            
             var model = pipeline.Fit(split.TrainSet);
 
             var predictions = model.Transform(split.TestSet);
 
             var metrics = ctx.BinaryClassification.Evaluate(predictions);
 
-            Console.WriteLine($"Accuracy - {metrics.Accuracy}");
             ctx.Model.Save(model, data.Schema, "model.zip");
             _model = model;
             return metrics.Accuracy;

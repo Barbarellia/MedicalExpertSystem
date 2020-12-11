@@ -58,6 +58,7 @@ namespace MedicalExpertSystem.Pages.MedicalDataSets.UserMedicalData
 
             var dataToUpdate = await _context.MedicalData
                 .Include(x=>x.Patient)
+                .ThenInclude(x => x.AppUser)
                 .FirstOrDefaultAsync(x => x.Id == idP);
 
             if(await TryUpdateModelAsync<MedicalData>(

@@ -18,6 +18,7 @@ namespace MedicalExpertSystem.Models
 
         [Display(Name="DPF")]
         public double DiabetesPedigreeFunction { get; set; }
+
         public double Bmi { get; set; }
         public int Age { get; set; }
         public bool? Prediction { get; set; }
